@@ -1,0 +1,297 @@
+
+/* Reset and full width/height setup */
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Prefer Inter if available */
+  background-color: #F8FAFC; /* Lightest gray for overall background */
+  color: #1F2937; /* Darker text for readability */
+  box-sizing: border-box; /* Ensure padding/border is included in element's total width/height */
+  line-height: 1.6; /* Improved line spacing */
+}
+
+/* Base box-sizing for all elements */
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 1rem 0;
+  color: #1F2937; /* Consistent dark heading color */
+  line-height: 1.2;
+}
+
+h1 { font-size: 2.5rem; font-weight: 700; }
+h2 { font-size: 2rem; font-weight: 600; }
+h3 { font-size: 1.5rem; font-weight: 600; }
+
+/* Global elements */
+button, select, textarea, input {
+  font-family: inherit;
+  font-size: 1rem; /* Consistent font size */
+}
+
+/* Container stretches full width, adds a slight max-width for very large screens */
+.container {
+  width: 100%; /* Changed from 100vw to 100% for better behavior within body */
+  max-width: 1200px; /* Max width for content on very large screens */
+  margin: 0 auto; /* Center the container */
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Header */
+header {
+  background-color: #312E81; /* A deeper indigo for a strong header */
+  color: #E0E7FF; /* Lighter text for contrast */
+  padding: 2.5rem 2rem; /* More vertical padding */
+  text-align: center;
+  border-radius: 12px; /* Slightly more rounded corners */
+  margin-bottom: 2.5rem; /* More space below header */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* More pronounced shadow for depth */
+}
+
+/* Layout: two columns on wide screens */
+main {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Make left column (input/output) wider than history */
+  gap: 2.5rem; /* Increased gap for better spacing */
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 1024px) { /* Adjust breakpoint for two columns */
+    main {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
+        gap: 2rem;
+    }
+}
+
+/* Sections (left and right panels - now applies to input/output and history) */
+section, aside { /* Apply common styling to main sections and aside */
+  background-color: #FFFFFF; /* Clean white background for cards */
+  padding: 2rem; /* Increased padding inside cards */
+  border-radius: 12px; /* Consistent rounded corners */
+  /* New, softer multi-layer box-shadow */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  min-width: 0; /* Prevent overflow issues */
+  flex: 1;
+  border: 1px solid #E5E7EB; /* Subtle border for definition */
+}
+
+
+/* Form layout */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem; /* Slightly larger gap in forms */
+}
+
+/* Code editor and textarea styles */
+textarea,
+.code-editor {
+  width: 100%;
+  min-height: 320px; /* Slightly taller default height */
+  padding: 1.25rem; /* More internal padding */
+  border: 1px solid #D1D5DB; /* Lighter, softer border */
+  border-radius: 8px;
+  font-family: 'Fira Code', 'JetBrains Mono', monospace; /* Modern monospace fonts */
+  font-size: 0.95rem; /* Slightly smaller font for code */
+  background-color: #F8F9FB; /* Very light background for code */
+  resize: vertical;
+  line-height: 1.5; /* Good line height for code */
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+textarea:focus,
+.code-editor:focus-within { /* Use focus-within for the div wrapper */
+  border-color: #6366F1; /* Primary color on focus */
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25); /* Subtle focus ring */
+  outline: none; /* Remove default outline */
+}
+
+
+/* Button styling */
+button {
+  background-color: #4F46E5; /* Vibrant indigo primary color */
+  color: white;
+  font-weight: 600; /* Slightly bolder text */
+  border: none;
+  padding: 0.85rem 1.75rem; /* More padding for a larger touch area */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease; /* Smooth transition */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for buttons */
+}
+
+button:hover:not(:disabled) {
+  background-color: #4338CA; /* Slightly darker indigo on hover */
+  transform: translateY(-1px); /* Slight lift effect */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); /* More pronounced shadow on hover */
+}
+
+button:active:not(:disabled) {
+    transform: translateY(0); /* Press down effect */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+button:disabled {
+  background-color: #9CA3AF;
+  cursor: not-allowed;
+  opacity: 0.7; /* Indicate disabled state more clearly */
+  box-shadow: none;
+}
+
+/* Dropdown/select */
+.select-control {
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #D1D5DB;
+  background-color: #F3F4F6; /* Light gray background */
+  appearance: none; /* Remove default dropdown arrow */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E%3C/svg%3E"); /* Custom arrow */
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1.25em;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.select-control:focus {
+  border-color: #6366F1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+  outline: none;
+}
+
+
+/* Response container */
+.response-box {
+  background-color: #FDFDFD; /* Slightly off-white for content */
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #E5E7EB;
+  min-height: 200px; /* Ensure it has some height */
+  overflow: auto; /* Allow scrolling for long content */
+  white-space: pre-wrap; /* Preserve whitespace and wrap long lines */
+  word-wrap: break-word; /* Break long words */
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Image output */
+.image-wrapper {
+  text-align: center;
+  padding: 1rem; /* Add padding around image */
+}
+
+.image-wrapper img {
+  max-width: 100%;
+  height: auto; /* Maintain aspect ratio */
+  border: 1px solid #D1D5DB;
+  border-radius: 8px;
+  margin-top: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for images */
+}
+
+
+
+.history-item {
+  padding: 1rem; /* More padding */
+  border: 1px solid #E0E7FF; /* Lighter, primary-tinted border */
+  border-radius: 8px; /* Slightly more rounded */
+  background-color: #F8FAFC; /* Lighter background for items */
+  margin-bottom: 0.75rem; /* More space between items */
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Very subtle shadow */
+}
+
+.history-item:hover {
+  background-color: #EEF2FF; /* Light primary tint on hover */
+  border-color: #C7D2FE; /* More prominent border on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* Enhanced shadow on hover */
+}
+
+/* Utility classes */
+.text-muted {
+  color: #6B7280; /* Medium gray */
+  font-style: italic;
+  font-size: 0.85rem; /* Slightly smaller for muted text */
+}
+
+.bg-highlight {
+  background-color: #FFFBEB; /* Softer, lighter yellow highlight */
+  padding: 0.1em 0.3em;
+  border-radius: 4px;
+}
+
+/* Code editor specific styling (for react-simple-code-editor) */
+.editor-container {
+  border: 1px solid #D1D5DB;
+  border-radius: 8px;
+  overflow: hidden; /* Ensures code doesn't spill out */
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.editor-container .token-line {
+  /* No specific styling here unless needed for line numbers or similar */
+}
+
+/* PrismJS theme overrides (if using a default theme) */
+/* You might need to import a PrismJS theme and then override specific colors */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #9CA3AF; /* Light gray for comments */
+}
+.token.punctuation {
+  color: #6B7280; /* Medium gray for punctuation */
+}
+.token.selector,
+.token.tag {
+  color: #EF4444; /* Red for tags/selectors */
+}
+.token.attr-name,
+.token.property,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #F97316; /* Orange for numbers/props */
+}
+.token.string,
+.token.builtin,
+.token.char,
+.token.inserted {
+  color: #10B981; /* Green for strings */
+}
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #3B82F6; /* Blue for operators */
+}
+.token.atrule,
+.token.keyword {
+  color: #6366F1; /* Primary color for keywords */
+}
+.token.function,
+.token.class-name {
+  color: #EC4899; /* Pink for functions/classes */
+}
+.token.regex,
+.token.important,
+.token.variable {
+  color: #FACC15; /* Yellow for regex/variables */
+}
+
